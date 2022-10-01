@@ -76,11 +76,11 @@ __typeof (__fcntl) __fcntl_nocancel;
 #define __fcntl64_nocancel(...) \
   __fcntl_nocancel (__VA_ARGS__)
 
-static inline int
+static inline ssize_t
 __getrandom_nocancel (void *buf, size_t buflen, unsigned int flags)
 {
   int save_errno = errno;
-  int r = __getrandom (buf, buflen, flags);
+  ssize_t r = __getrandom (buf, buflen, flags);
   r = r == -1 ? -errno : r;
   __set_errno (save_errno);
   return r;
